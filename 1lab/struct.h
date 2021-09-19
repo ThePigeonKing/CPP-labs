@@ -48,29 +48,11 @@ class Matrix {
 
   void print_matr();
 
-  std::vector<int> do_business(int);
+  std::vector<double> do_business(int);
 
-  Matrix() {
-    std::cout << "Enter width of matrix --> ";
-    std::cin >> height;
-    if (height < 1) {
-      throw std::invalid_argument("Width must be positive!\n");
-    }
-    std::cout << "Enter height of matrix --> ";
-    std::cin >> width;
-    if (width < 1) {
-      throw std::invalid_argument("Height must pe positive!\n");
-    }
+  Matrix();
 
-    std::cout << std::endl;
-  }
-
-  ~Matrix() {
-    for (int i = 0; i < coords.size(); ++i) {
-      delete coords[i];
-    }
-    std::cout << YELLOW << "Cleared!\n" << RESET;
-  }
+  ~Matrix();
 
  private:
   int height, width;

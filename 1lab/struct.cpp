@@ -1,5 +1,46 @@
 #include "struct.h"
 
+namespace inps {
+
+int getInt() {
+  int insert;
+
+  std::cin >> insert;
+  while (std::cin.fail()) {
+    if (std::cin.eof()) {
+      throw std::runtime_error("EOF found!\n");
+    }
+
+    std::cout << YELLOW << "Wrond int input, try again!" << RESET << std::endl;
+
+    std::cin.clear();
+    std::cin.ignore(256, '\n');
+    std::cin >> insert;
+  }
+  return insert;
+}
+
+double getDouble() {
+  double insert = -1;
+
+  std::cin >> insert;
+  while (std::cin.fail()) {
+    if (std::cin.eof()) {
+      throw std::runtime_error("EOF found!\n");
+    }
+
+    std::cout << YELLOW << "Wrond double input, try again!" << RESET << std::endl;
+
+    std::cin.clear();
+    std::cin.ignore(256, '\n');
+    std::cin >> insert;
+  }
+
+  return insert;
+}
+
+}  // namespace inps
+
 namespace lab1 {
 
 void Matrix::input() {
@@ -11,7 +52,15 @@ void Matrix::input() {
 
   for (auto y = 0; y < width; ++y) {
     for (auto x = 0; x < height; ++x) {
-      std::cin >> inp;
+      try {
+        inp = inps::getDouble();
+      } catch (const std::runtime_error &str) {
+        for (int i = 0; i < coords.size(); ++i){
+          delete coords[i];
+        }
+        throw std::runtime_error(str);
+      }
+
       if (inp != 0.0) {
         new_item = new Item;
         new_item->x = x;
@@ -32,6 +81,36 @@ void Matrix::print_cords() {
     std::cout << "(" << coords[i]->x + 1 << ", " << coords[i]->y + 1 << ") - "
               << coords[i]->value << std::endl;
   }
+}
+
+Matrix::Matrix() {
+  std::cout << "Enter height of matrix --> ";
+  try {
+    height = inps::getInt();
+  } catch (const std::runtime_error &str) {
+    throw std::runtime_error(str);
+  }
+  if (height < 1) {
+    throw std::invalid_argument("Height must be positive!\n");
+  }
+  std::cout << "Enter width of matrix --> ";
+  try {
+    width = inps::getInt();
+  } catch (const std::runtime_error &str) {
+    throw std::runtime_error(str);
+  }
+  if (width < 1) {
+    throw std::invalid_argument("Width must pe positive!\n");
+  }
+
+  std::cout << std::endl;
+}
+
+Matrix::~Matrix() {
+  for (int i = 0; i < coords.size(); ++i) {
+    delete coords[i];
+  }
+  std::cout << YELLOW << "Cleared!\n" << RESET;
 }
 
 void Matrix::print_matr() {
@@ -67,39 +146,44 @@ int find_coords(std::vector<Item *> coords, int x_to_find, int y_to_find) {
   return -1;
 }
 
-std::vector<int> Matrix::do_business(int debug = 0) {
-  
-  int sum = 0, last_y = -1, current_y = 0, pos = 0, index = -1;
-  std::vector<int> final;
+std::vector<double> Matrix::do_business(int debug = 0) {
+  int last_y = -1, current_y = 0, pos = 0, index = -1;
+  double sum = 0;
+  std::vector<double> final;
 
-  if (coords.size() == 0){
-    for (auto i = 0; i < height; ++i){
+  if (coords.size() == 0) {
+    for (auto i = 0; i < height; ++i) {
       final.push_back(0);
     }
     return final;
   }
 
   for (int i = 0; i < height; ++i) {
+    if (pos == coords.size()) {
+      final.push_back(0);
+      continue;
+    }
+
     if (coords[pos]->y == i) {  // найден элемент такого Y
 
       while (coords[pos]->y == i) {
         if (coords[pos]->y == 0) {
-          index = find_coords(coords, coords[pos]->x, coords.size() - 1);
+          index = find_coords(coords, coords[pos]->x, height - 1);
         } else {
           index = find_coords(coords, coords[pos]->x, coords[pos]->y - 1);
         }
         if (index == -1) {
           sum += coords[pos]->value;
-          
+
         } else if (coords[index]->value < coords[pos]->value) {
           sum += coords[pos]->value;
         }
         pos++;
-        if (pos == coords.size()){
+        if (pos == coords.size()) {
           break;
         }
       }
-      
+
       final.push_back(sum);
       sum = 0;
     } else {
