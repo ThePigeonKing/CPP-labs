@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iomanip>      // <-- for std::setprecision
 
 #include "struct.h"
 
@@ -22,9 +22,11 @@ int main(int argc, char const *argv[]) {
     return -1;
   }
 
+// init with values
   Ellipse elps(a, b);
 
-
+  std::cout << std::setprecision(4) << std::endl
+            << "Focal length of ellipse: " << elps.focal_distance() << std::endl;
 
   return 0;
 }
