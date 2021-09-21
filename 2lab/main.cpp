@@ -29,7 +29,9 @@ int main(int argc, char const *argv[]) {
 
   std::cout << std::setprecision(4) << std::endl
             << "Focal length of ellipse: " << focal << std::endl
-            << "Eccentricity: " << elps.eccentricity() << std::endl;
+            << "Eccentricity: " << elps.eccentricity() << std::endl
+            << "Lenght of ellipse: " << elps.length() << std::endl
+            << "Area of ellipse: " << elps.area() << std::endl;
 
   return 0;
 }

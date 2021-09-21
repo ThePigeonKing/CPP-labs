@@ -46,6 +46,10 @@ class Ellipse {
 
   [[nodiscard]] double eccentricity();
 
+  [[nodiscard]] double length();
+
+  [[nodiscard]] double area();
+
   Ellipse(int num1 = 1, int num2 = 1);
   ~Ellipse();
 };

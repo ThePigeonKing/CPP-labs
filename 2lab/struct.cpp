@@ -34,3 +34,7 @@ tpk2::Ellipse::Ellipse(int num1, int num2) {
     return sqrt(1 - (pow(b, 2) / pow(a, 2)));
   }
 }
+
+[[nodiscard]] double tpk2::Ellipse::length() { return (M_PI * (a + b)); }
+
+[[nodiscard]] double tpk2::Ellipse::area() { return (M_PI * a * b); }
