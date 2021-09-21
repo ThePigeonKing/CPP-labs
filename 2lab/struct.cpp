@@ -39,25 +39,27 @@ tpk2::Ellipse::Ellipse(int num1, int num2) {
 
 [[nodiscard]] double tpk2::Ellipse::area() { return (M_PI * a * b); }
 
-
-[[nodiscard]] double tpk2::Ellipse::min_dist(double focal){
-  if (a >= b){
-    return (a - focal);
+[[nodiscard]] double tpk2::Ellipse::min_dist(double focal) {
+  if (a >= b) {
+    return abs(a - focal);
   } else {
-    return (b - focal);
+    return abs(b - focal);
   }
 }
 
-[[nodiscard]] double tpk2::Ellipse::max_dist(double focal){
-  if (a >= b){
-    return (a + focal);
+[[nodiscard]] double tpk2::Ellipse::max_dist(double focal) {
+  if (a >= b) {
+    return abs(a + focal);
   } else {
-    return (b + focal);
+    return abs(b + focal);
   }
 }
 
-// 
-[[nodiscard]] double* tpk2::Ellipse::find_ys(double x){
-  
-  
+// out_of_range = fail
+[[nodiscard]] double tpk2::Ellipse::find_ys(double x) {
+  if (abs(x) > abs(a)) {
+    throw std::out_of_range("X out of range!");
+  }
+
+  return (((double)b / a) * sqrt((pow(a, 2) - pow(x, 2))));
 }
