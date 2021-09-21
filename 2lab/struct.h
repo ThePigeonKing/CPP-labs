@@ -25,20 +25,26 @@ class Ellipse {
   [[nodiscard]] int get_b() { return b; }
 
   void set_a(int number) {
-    if (number != 0)
+    if (number != 0) {
       a = number;
-    else
+    } else {
       std::cout << "Fail in setting a!" << std::endl;
+      return;
+    }
   }
 
   void set_b(int number) {
-    if (number != 0)
-      a = number;
-    else
+    if (number != 0) {
+      b = number;
+    } else {
       std::cout << "Fail in setting b!" << std::endl;
+      return;
+    }
   }
 
   [[nodiscard]] double focal_distance();
+
+  [[nodiscard]] double eccentricity();
 
   Ellipse(int num1 = 1, int num2 = 1);
   ~Ellipse();

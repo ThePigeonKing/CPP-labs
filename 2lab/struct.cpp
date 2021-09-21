@@ -26,3 +26,11 @@ tpk2::Ellipse::Ellipse(int num1, int num2) {
 [[nodiscard]] double tpk2::Ellipse::focal_distance() {
   return (2 * (sqrt(abs(pow(a, 2) - pow(b, 2)))));
 }
+
+[[nodiscard]] double tpk2::Ellipse::eccentricity() {
+  if (a <= b) {
+    return sqrt(1 - (pow(a, 2) / pow(b, 2)));
+  } else {
+    return sqrt(1 - (pow(b, 2) / pow(a, 2)));
+  }
+}
