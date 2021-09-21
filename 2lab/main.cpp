@@ -31,7 +31,11 @@ int main(int argc, char const *argv[]) {
             << "Focal length of ellipse: " << focal << std::endl
             << "Eccentricity: " << elps.eccentricity() << std::endl
             << "Lenght of ellipse: " << elps.length() << std::endl
-            << "Area of ellipse: " << elps.area() << std::endl;
+            << "Area of ellipse: " << elps.area() << std::endl
+            << "Minimum distance from center" << elps.min_dist(focal) << std::endl
+            << "Maximum distance from center" << elps.max_dist(focal) << std::endl;
+
+  
 
   return 0;
 }

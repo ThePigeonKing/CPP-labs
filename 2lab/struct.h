@@ -50,6 +50,12 @@ class Ellipse {
 
   [[nodiscard]] double area();
 
+  [[nodiscard]] double min_dist(double);
+
+  [[nodiscard]] double max_dist(double);
+
+  [[nodiscard]] double* find_ys(double);
+
   Ellipse(int num1 = 1, int num2 = 1);
   ~Ellipse();
 };

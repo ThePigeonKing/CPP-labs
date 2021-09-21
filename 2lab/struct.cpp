@@ -38,3 +38,26 @@ tpk2::Ellipse::Ellipse(int num1, int num2) {
 [[nodiscard]] double tpk2::Ellipse::length() { return (M_PI * (a + b)); }
 
 [[nodiscard]] double tpk2::Ellipse::area() { return (M_PI * a * b); }
+
+
+[[nodiscard]] double tpk2::Ellipse::min_dist(double focal){
+  if (a >= b){
+    return (a - focal);
+  } else {
+    return (b - focal);
+  }
+}
+
+[[nodiscard]] double tpk2::Ellipse::max_dist(double focal){
+  if (a >= b){
+    return (a + focal);
+  } else {
+    return (b + focal);
+  }
+}
+
+// 
+[[nodiscard]] double* tpk2::Ellipse::find_ys(double x){
+  
+  
+}
