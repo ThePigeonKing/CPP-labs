@@ -1,5 +1,6 @@
 # CPP-labs
 Some more trash coding
+
 Link for course - [hyper](https://hyper.mephi.ru)
 
 **Все на великом и могучем**
